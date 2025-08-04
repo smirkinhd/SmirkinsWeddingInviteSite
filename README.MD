@@ -6,4 +6,4 @@
 - [Frontend](https://github.com/smirkinhd/SmirkinsWeddingInviteSite/tree/frontend)
 - [Backend](https://github.com/smirkinhd/SmirkinsWeddingInviteSite/tree/backend) 
 - [prod] (линки пока нет)
-- [main] (https://github.com/smirkinhd/SmirkinsWeddingInviteSite/)
+- [main] (https://github.com/smirkinhd/SmirkinsWeddingInviteSite)
