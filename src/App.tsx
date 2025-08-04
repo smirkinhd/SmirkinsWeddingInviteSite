@@ -50,11 +50,24 @@ function App() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Form submitted:', formData);
-    setIsSubmitted(true);
-    setTimeout(() => setIsSubmitted(false), 3000);
+  const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+    try {
+      const response = await fetch('/api/registration', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+
+      if (response.ok) {
+        setIsSubmitted(true);
+        setTimeout(() => setIsSubmitted(false), 3000);
+      } else {
+        console.error('Ошибка при отправке формы');
+      }
+    } catch (err) {
+      console.error('Ошибка:', err);
+    }
   };
 
   const scrollToSection = (sectionId: string) => {
@@ -224,19 +237,19 @@ function App() {
             <div className="text-center p-8 border border-gray-200 rounded-lg hover:shadow-lg transition-shadow duration-300">
               <Calendar className="w-12 h-12 mx-auto mb-4 text-gray-800" />
               <h3 className="text-xl font-medium mb-2">Дата</h3>
-              <p className="text-gray-600">Суббота, 15 июня 2024</p>
+              <p className="text-gray-600">Суббота, 20 сентября 2025</p>
             </div>
             
             <div className="text-center p-8 border border-gray-200 rounded-lg hover:shadow-lg transition-shadow duration-300">
               <Clock className="w-12 h-12 mx-auto mb-4 text-gray-800" />
               <h3 className="text-xl font-medium mb-2">Время</h3>
-              <p className="text-gray-600">Регистрация в 16:00<br />Банкет в 18:00</p>
+              <p className="text-gray-600">Регистрация в 15:00<br />Банкет в 16:00</p>
             </div>
             
             <div className="text-center p-8 border border-gray-200 rounded-lg hover:shadow-lg transition-shadow duration-300">
               <MapPin className="w-12 h-12 mx-auto mb-4 text-gray-800" />
               <h3 className="text-xl font-medium mb-2">Место</h3>
-              <p className="text-gray-600">Ресторан "Усадьба"<br />ул. Садовая, 42</p>
+              <p className="text-gray-600">Ресторан ""<br />адрес</p>
             </div>
           </div>
 
@@ -276,7 +289,7 @@ function App() {
             <h2 className="text-4xl md:text-5xl font-light mb-6">Регистрация гостей</h2>
             <div className="w-24 h-1 bg-white mx-auto mb-6"></div>
             <p className="text-lg text-gray-300">
-              Пожалуйста, подтвердите ваше участие до 1 июня 2024
+              Пожалуйста, подтвердите ваше участие до 1 сентября 2025
             </p>
           </div>
 
