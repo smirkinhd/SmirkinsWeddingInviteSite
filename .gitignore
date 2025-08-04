@@ -400,3 +400,7 @@ Temp/*
 
 #VS Studio files
 ./vs
+
+#Settings Files
+WeddingSmirkinsSite/appsettings.Development.json
+WeddingSmirkinsSite/appsettings.json
