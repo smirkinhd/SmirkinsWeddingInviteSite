@@ -2,10 +2,10 @@
 
 public class Registration
 {
-    public int Id { get; set; }
-    public string Surname { get; set; } = string.Empty;
-    public string FirstName { get; set; } = string.Empty;
-    public string Patronymic { get; set; } = string.Empty;
-    public string PhoneNumber { get; set; } = string.Empty;
-    public bool Confirmed { get; set; }
+    public int id { get; set; }
+    public string surname { get; set; } = string.Empty;
+    public string first_name { get; set; } = string.Empty;
+    public string patronymic { get; set; } = string.Empty;
+    public string phone_number { get; set; } = string.Empty;
+    public bool confirmed { get; set; }
 }

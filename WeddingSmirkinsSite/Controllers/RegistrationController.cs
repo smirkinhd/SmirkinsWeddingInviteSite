@@ -18,16 +18,16 @@ public class RegistrationController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Register([FromBody] Registration data)
     {
-        if (!ModelState.IsValid || !data.Confirmed)
+        if (!ModelState.IsValid || !data.confirmed)
             return BadRequest("Некорректные данные");
 
-        var exists = await _context.Registrations
-            .AnyAsync(r => r.PhoneNumber == data.PhoneNumber);
+        var exists = await _context.Guest
+            .AnyAsync(r => r.phone_number == data.phone_number);
 
         if (exists)
             return Conflict("Пользователь с таким номером уже зарегистрирован.");
 
-        _context.Registrations.Add(data);
+        _context.Guest.Add(data);
         await _context.SaveChangesAsync();
 
         return Ok(new { message = "Регистрация сохранена!" });
