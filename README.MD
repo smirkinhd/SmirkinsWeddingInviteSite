@@ -4,6 +4,4 @@
 
 ## Разделы разработки
 - [Frontend](https://github.com/smirkinhd/SmirkinsWeddingInviteSite/tree/frontend)
-- [Backend](https://github.com/smirkinhd/SmirkinsWeddingInviteSite/tree/backend) 
-- [prod] (линки пока нет)
-- [main](https://github.com/smirkinhd/SmirkinsWeddingInviteSite)
+- [Backend + prod](https://github.com/smirkinhd/SmirkinsWeddingInviteSite/tree/backend) 
