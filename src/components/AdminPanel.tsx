@@ -36,8 +36,7 @@ export default function AdminPanel({ onLogout }: AdminPanelProps) {
       setGuests([]);
       return;
     }
-
-    // Логируем каждого гостя отдельно
+    
     data.forEach((guest, index) => {
       console.log(`👤 Гость #${index + 1}:`, guest);
     });
@@ -60,27 +59,30 @@ export default function AdminPanel({ onLogout }: AdminPanelProps) {
     await supabase.auth.signOut();
     onLogout();
   };
-
-  const exportToCSV = () => {
+    const exportToCSV = () => {
     const headers = ['Фамилия', 'Имя', 'Отчество', 'Номер телефона', 'Подтверждение', 'Дата регистрации'];
-    const csvContent = [
-      headers.join(','),
-      ...guests.map(guest => [
-        guest.surname,
-        guest.first_name,
-        guest.patronymic || '',
-        guest.phone_number,
-        guest.confirmed ? 'Да' : 'Нет',
-        new Date(guest.created_at).toLocaleDateString('ru-RU')
-      ].join(','))
-    ].join('\n');
 
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const csvRows = [
+      headers.join(','), 
+      ...guests.map(guest =>
+        [
+          guest.surname,
+          guest.first_name,
+          guest.patronymic || '',
+          guest.phone_number,
+          guest.confirmed ? 'Да' : 'Нет',
+          new Date(guest.created_at).toLocaleDateString('ru-RU')
+        ].join(',')
+      )
+    ];
+
+    const csvContent = csvRows.join('\n');
+
+    const blob = new Blob([`\uFEFF${csvContent}`], { type: 'text/csv;charset=utf-8;' });
     const link = document.createElement('a');
     const url = URL.createObjectURL(blob);
     link.setAttribute('href', url);
     link.setAttribute('download', `wedding_guests_${new Date().toISOString().split('T')[0]}.csv`);
-    link.style.visibility = 'hidden';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
