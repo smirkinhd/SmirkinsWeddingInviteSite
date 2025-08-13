@@ -15,7 +15,7 @@ export default function AdminPanel({ onLogout }: AdminPanelProps) {
     try {
       setLoading(true);
       const { data, error } = await supabase
-        .from('guests')
+        .from('Guest')
         .select('*')
         .order('created_at', { ascending: false });
 
