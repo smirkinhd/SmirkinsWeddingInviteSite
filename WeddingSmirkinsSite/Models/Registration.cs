@@ -1,6 +1,6 @@
 ﻿namespace WeddingSmirkinsSite.Models;
 
-public class Registration
+public class Guest
 {
     public int id { get; set; }
     public string surname { get; set; } = string.Empty;
