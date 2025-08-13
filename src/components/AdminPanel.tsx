@@ -12,27 +12,45 @@ export default function AdminPanel({ onLogout }: AdminPanelProps) {
   const [error, setError] = useState('');
 
   const fetchGuests = async () => {
-    try {
-      setLoading(true);
-      const { data, error } = await supabase
-        .from('Guest')
-        .select('*')
-        .order('created_at', { ascending: false });
+  try {
+    setLoading(true);
+    setError('');
 
-      if (error) {
-        setError('Ошибка загрузки данных');
-        console.error('Error fetching guests:', error);
-      } else {
-        setGuests(data || []);
-        setError('');
-      }
-    } catch (err) {
-      setError('Произошла ошибка при загрузке данных');
-      console.error('Error:', err);
-    } finally {
-      setLoading(false);
+    console.log('📡 Запрос к Supabase...');
+    const { data, error } = await supabase
+      .from('Guest')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    console.log('📥 Ответ от Supabase:', { data, error });
+
+    if (error) {
+      console.error('❌ Ошибка при получении гостей:', error);
+      setError('Ошибка загрузки данных: ' + (error.message || 'неизвестно'));
+      setGuests([]);
+      return;
     }
-  };
+
+    if (!data || data.length === 0) {
+      console.warn('⚠️ Данные не найдены (пустой массив).');
+      setGuests([]);
+      return;
+    }
+
+    // Логируем каждого гостя отдельно
+    data.forEach((guest, index) => {
+      console.log(`👤 Гость #${index + 1}:`, guest);
+    });
+
+    setGuests(data);
+  } catch (err) {
+    console.error('💥 Исключение при загрузке данных:', err);
+    setError('Произошла ошибка при загрузке данных');
+    setGuests([]);
+  } finally {
+    setLoading(false);
+  }
+};
 
   useEffect(() => {
     fetchGuests();

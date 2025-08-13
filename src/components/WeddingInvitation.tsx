@@ -3,18 +3,18 @@ import { Heart, MapPin, Clock, Calendar, Phone, User, Check, ChevronLeft, Chevro
 
 interface FormData {
   surname: string;
-  firstName: string;
+  first_name: string;
   patronymic: string;
-  phoneNumber: string;
+  phone_number: string;
   confirmed: boolean;
 }
 
 export default function WeddingInvitation() {
   const [formData, setFormData] = useState<FormData>({
     surname: '',
-    firstName: '',
+    first_name: '',
     patronymic: '',
-    phoneNumber: '',
+    phone_number: '',
     confirmed: false
   });
 
@@ -383,16 +383,16 @@ export default function WeddingInvitation() {
               </div>
 
               <div>
-                <label htmlFor="firstName" className="block text-sm font-medium mb-2">
+                <label htmlFor="first_name" className="block text-sm font-medium mb-2">
                   Имя *
                 </label>
                 <div className="relative">
                   <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                   <input
                     type="text"
-                    id="firstName"
-                    name="firstName"
-                    value={formData.firstName}
+                    id="first_name"
+                    name="first_name"
+                    value={formData.first_name}
                     onChange={handleInputChange}
                     required
                     className="w-full pl-10 pr-4 py-3 bg-white/10 border border-gray-600 rounded-lg focus:border-white focus:ring-2 focus:ring-white/20 text-white placeholder-gray-400 transition-all duration-300"
@@ -421,16 +421,16 @@ export default function WeddingInvitation() {
             </div>
 
             <div>
-              <label htmlFor="phoneNumber" className="block text-sm font-medium mb-2">
+              <label htmlFor="phone_number" className="block text-sm font-medium mb-2">
                 Номер телефона *
               </label>
               <div className="relative">
                 <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <input
                   type="tel"
-                  id="phoneNumber"
-                  name="phoneNumber"
-                  value={formData.phoneNumber}
+                  id="phone_number"
+                  name="phone_number"
+                  value={formData.phone_number}
                   onChange={handleInputChange}
                   required
                   className="w-full pl-10 pr-4 py-3 bg-white/10 border border-gray-600 rounded-lg focus:border-white focus:ring-2 focus:ring-white/20 text-white placeholder-gray-400 transition-all duration-300"
@@ -459,7 +459,7 @@ export default function WeddingInvitation() {
 
             <button
               type="submit"
-              disabled={!formData.surname || !formData.firstName || !formData.phoneNumber || !formData.confirmed || isSubmitting}
+              disabled={!formData.surname || !formData.first_name || !formData.phone_number || !formData.confirmed || isSubmitting}
               className="w-full py-4 px-8 bg-white text-gray-900 rounded-lg font-medium uppercase tracking-wider text-sm hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 transform hover:scale-105"
             >
               {isSubmitting ? 'Отправка...' : isSubmitted ? 'Отправлено!' : 'Подтвердить участие'}
