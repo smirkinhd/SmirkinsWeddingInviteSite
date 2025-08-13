@@ -17,6 +17,10 @@ public class RegistrationController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Register([FromBody] Guest data)
     {
+        var deadline = new DateTime(2025, 9, 6);
+        if (DateTime.UtcNow.Date > deadline.Date)
+            return BadRequest("Регистрация закрыта.");
+
         if (!ModelState.IsValid || !data.confirmed)
             return BadRequest("Некорректные данные");
 
