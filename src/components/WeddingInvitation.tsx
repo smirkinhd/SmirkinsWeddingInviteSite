@@ -88,39 +88,83 @@ export default function WeddingInvitation() {
   const goToImage = (index: number) => {
     setCurrentImageIndex(index);
   };
+
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-white text-gray-900">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm z-50 border-b border-gray-100">
-        <div className="max-w-6xl mx-auto px-4 py-4">
-          <div className="flex justify-center space-x-8">
-            <button
-              onClick={() => scrollToSection('hero')}
-              className="text-sm uppercase tracking-wider hover:text-gray-600 transition-colors duration-300"
-            >
-              Главная
-            </button>
-            <button
-              onClick={() => scrollToSection('story')}
-              className="text-sm uppercase tracking-wider hover:text-gray-600 transition-colors duration-300"
-            >
-              Наша история
-            </button>
-            <button
-              onClick={() => scrollToSection('details')}
-              className="text-sm uppercase tracking-wider hover:text-gray-600 transition-colors duration-300"
-            >
-              Детали
-            </button>
-            <button
-              onClick={() => scrollToSection('registration')}
-              className="text-sm uppercase tracking-wider hover:text-gray-600 transition-colors duration-300"
-            >
-              Регистрация
-            </button>
-          </div>
+      <div className="max-w-6xl mx-auto px-4 py-4">
+
+        {/* Десктопная версия */}
+        <div className="hidden md:flex justify-center space-x-8">
+          <button
+            onClick={() => scrollToSection("hero")}
+            className="text-sm uppercase tracking-wider hover:text-gray-600 transition-colors duration-300"
+          >
+            Главная
+          </button>
+          <button
+            onClick={() => scrollToSection("story")}
+            className="text-sm uppercase tracking-wider hover:text-gray-600 transition-colors duration-300"
+          >
+            Наша история
+          </button>
+          <button
+            onClick={() => scrollToSection("colorPitching")}
+            className="text-sm uppercase tracking-wider hover:text-gray-600 transition-colors duration-300"
+          >
+            Цветовая гамма торжества
+          </button>
+          <button
+            onClick={() => scrollToSection("details")}
+            className="text-sm uppercase tracking-wider hover:text-gray-600 transition-colors duration-300"
+          >
+            Детали
+          </button>
+          <button
+            onClick={() => scrollToSection("registration")}
+            className="text-sm uppercase tracking-wider hover:text-gray-600 transition-colors duration-300"
+          >
+            Регистрация
+          </button>
         </div>
-      </nav>
+
+        {/* Мобильная версия */}
+        <div className="relative flex justify-center md:hidden">
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="text-sm uppercase tracking-wider hover:text-gray-600 transition-colors duration-300 border px-4 py-2 rounded-md bg-white"
+          >
+            Меню
+          </button>
+
+          {isOpen && (
+            <div className="absolute top-full mt-2 w-48 bg-white border rounded-lg shadow-lg overflow-hidden">
+              {[
+                { id: "hero", label: "Главная" },
+                { id: "story", label: "Наша история" },
+                { id: "colorPitching", label: "Цветовая гамма торжества" },
+                { id: "details", label: "Детали" },
+                { id: "registration", label: "Регистрация" },
+              ].map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => {
+                    scrollToSection(item.id);
+                    setIsOpen(false);
+                  }}
+                  className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </nav>
 
       {/* Hero Section */}
       <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden">
@@ -227,6 +271,32 @@ export default function WeddingInvitation() {
         </div>
       </section>
 
+      <section id="colorPitching" className="py-20 bg-gray-50">
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-4xl md:text-5xl font-light text-center mb-12">
+            Цветовая гамма торжества
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-5 gap-8 text-center">
+            <div>
+              <div className="w-20 h-20 rounded-full mx-auto" style={{ backgroundColor: '#dac1df' }}></div>
+            </div>
+            <div>
+              <div className="w-20 h-20 rounded-full mx-auto" style={{ backgroundColor: '#a77eaa' }}></div>
+            </div>
+            <div>
+              <div className="w-20 h-20 rounded-full mx-auto" style={{ backgroundColor: '#916795' }}></div>
+            </div>
+            <div>
+              <div className="w-20 h-20 rounded-full mx-auto" style={{ backgroundColor: '#6e4160' }}></div>
+            </div>
+            <div>
+              <div className="w-20 h-20 rounded-full mx-auto" style={{ backgroundColor: '#55304f' }}></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
       {/* Details Section */}
       <section id="details" className="py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4">
@@ -245,13 +315,13 @@ export default function WeddingInvitation() {
             <div className="text-center p-8 border border-gray-200 rounded-lg hover:shadow-lg transition-shadow duration-300">
               <Clock className="w-12 h-12 mx-auto mb-4 text-gray-800" />
               <h3 className="text-xl font-medium mb-2">Время</h3>
-              <p className="text-gray-600">Регистрация в 15:00<br />Банкет в 16:00</p>
+              <p className="text-gray-600">Регистрация в 16:00<br />Начало торжества в 16:30</p>
             </div>
             
             <div className="text-center p-8 border border-gray-200 rounded-lg hover:shadow-lg transition-shadow duration-300">
               <MapPin className="w-12 h-12 mx-auto mb-4 text-gray-800" />
               <h3 className="text-xl font-medium mb-2">Место</h3>
-              <p className="text-gray-600">Ресторан ""<br />адрес</p>
+              <p className="text-gray-600">Sherwood House, Усадьба "БаринЪ"<br />г.Уфа, Образцовая улица, 1 к1</p>
             </div>
           </div>
 
@@ -260,24 +330,20 @@ export default function WeddingInvitation() {
             <h3 className="text-2xl font-light mb-8 text-center">Расписание дня</h3>
             <div className="space-y-4 max-w-2xl mx-auto">
               <div className="flex items-center justify-between py-3 border-b border-gray-200">
-                <span className="font-medium">15:00</span>
+                <span className="font-medium">16:00</span>
                 <span className="text-gray-700">Сбор гостей</span>
               </div>
               <div className="flex items-center justify-between py-3 border-b border-gray-200">
-                <span className="font-medium">16:00</span>
-                <span className="text-gray-700">Начало банкета, приветственные речи</span>
-              </div>
-              <div className="flex items-center justify-between py-3 border-b border-gray-200">
                 <span className="font-medium">16:30</span>
-                <span className="text-gray-700">Первый танец молодоженов</span>
+                <span className="text-gray-700">Торжественная регистрация брака</span>
               </div>
               <div className="flex items-center justify-between py-3 border-b border-gray-200">
-                <span className="font-medium">17:30</span>
-                <span className="text-gray-700">Поздравления</span>
+                <span className="font-medium">17:00</span>
+                <span className="text-gray-700">Начало банкета</span>
               </div>
               <div className="flex items-center justify-between py-3">
-                <span className="font-medium">20:00</span>
-                <span className="text-gray-700">Развлекательная программа, танцы</span>
+                <span className="font-medium">22:00</span>
+                <span className="text-gray-700">Выступление кавер-группы "Отражение"</span>
               </div>
             </div>
           </div>
@@ -418,8 +484,16 @@ export default function WeddingInvitation() {
             С любовью, Герман и Аделина
           </p>
           <p className="text-sm text-gray-500">
-            По всем вопросам: +7 (964) 952-91-07 
-          </p>
+          По всем вопросам:{" "}
+          <a
+            href="https://t.me/smirkinhd"
+            className="text-blue-600 hover:underline"
+          >
+            Telegram
+          </a>{" "}
+          — Герман (жених)
+        </p>
+
         </div>
       </footer>
     </div>
